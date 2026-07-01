@@ -1,201 +1,255 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="google-site-verification" content="_7vBoeJ7Kqv-SsHGo9iVnmiczgGgO1ipTOD5ZlikAFM" />
+    <meta name="google-site-verification" content="_7vBoeJ7Kqv-SsHGo9iVnmiczgGg01ipTOD5ZlikAFM" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MPK SMPN 4 Paringin - Wadah Aspirasi Siswa</title>
+    <title>E-Aspirasi MPK SMPN 4 Paringin</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Trik CSS untuk menghilangkan background hitam secara instan pada latar merah/gelap */
-        .remove-black-bg {
-            mix-blend-mode: screen;
-        }
-    </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800">
+<body class="bg-gray-50 font-sans text-gray-800 flex flex-col min-h-screen">
 
-    <nav class="bg-red-700 text-white sticky top-0 z-50 shadow-md">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="h-10 w-10 overflow-hidden flex items-center justify-center">
-                    <img src="logo mpk.jpeg" alt="Logo MPK" class="h-12 w-12 object-cover remove-black-bg max-w-none">
+    <nav class="bg-gradient-to-r from-red-700 to-red-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <img src="logo mpk.jpeg" alt="Logo MPK" class="w-12 h-12 rounded-full border-2 border-white shadow-md object-cover">
+                <div>
+                    <h1 class="font-bold text-xl tracking-wide">E-ASPIRASI MPK</h1>
+                    <p class="text-xs text-red-200">SMP Negeri 4 Paringin</p>
                 </div>
-                <span class="font-bold text-xl tracking-wide">MPK SMPN 4 Paringin</span>
             </div>
-            <div class="hidden md:flex space-x-6 font-medium">
-                <a href="#Beranda" class="hover:text-red-200 transition">Beranda</a>
-                <a href="#Aspirasi" class="hover:text-red-200 transition">E-Aspirasi</a>
-                <a href="#Tracker" class="hover:text-red-200 transition">Status & Tanggapan</a>
-                <a href="#Struktur" class="hover:text-red-200 transition">Komisi</a>
+            <div class="flex space-x-2">
+                <button onclick="pindahTab('siswa')" id="btnTabSiswa" class="bg-white text-red-700 px-4 py-2 rounded-lg text-sm font-bold shadow transition cursor-pointer">
+                    <i class="fas fa-user mr-1"></i> Portal Siswa
+                </button>
+                <button onclick="pindahTab('admin')" id="btnTabAdmin" class="bg-red-800 hover:bg-red-900 text-white px-4 py-2 rounded-lg text-sm font-bold transition cursor-pointer">
+                    <i class="fas fa-user-shield mr-1"></i> Server Admin
+                </button>
             </div>
         </div>
     </nav>
 
-    <header id="Beranda" class="bg-gradient-to-r from-red-700 to-red-600 text-white py-16 px-4 text-center">
-        <div class="max-w-3xl mx-auto flex flex-col items-center">
-            <div class="h-32 w-32 mb-6 flex items-center justify-center overflow-hidden">
-                <img src="logo mpk.jpeg" alt="Logo MPK" class="h-36 w-36 object-cover remove-black-bg max-w-none">
+    <main id="portalSiswa" class="flex-grow max-w-2xl mx-auto w-full px-4 py-10">
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+            <div class="bg-gray-900 px-6 py-8 text-white text-center space-y-2">
+                <h2 class="text-2xl font-bold">Suara Siswa, Masa Depan Sekolah!</h2>
+                <p class="text-sm text-gray-400 max-w-md mx-auto">Sampaikan ide, saran, keluhan, atau aspirasimu secara online. MPK siap mendengar dan mengoordinasikannya ke pihak sekolah.</p>
             </div>
-            
-            <span class="bg-white text-red-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Suaramu, Hakmu!</span>
-            <h1 class="text-4xl md:text-5xl font-extrabold mt-4 mb-6 leading-tight">MPK SMPN 4 Paringin Digital Hub</h1>
-            <p class="text-red-100 text-lg mb-8">Selamat datang di platform resmi Majelis Perwakilan Kelas SMPN 4 Paringin. Sampaikan aspirasi, kritik, dan saranmu demi kemajuan sekolah kita bersama.</p>
-            <a href="#Aspirasi" class="bg-white hover:bg-gray-100 text-red-700 font-bold px-8 py-3 rounded-lg shadow-lg transition transform hover:-translate-y-0.5">
-                Kirim Aspirasi Sekarang <i class="fas fa-paper-plane ml-2"></i>
-            </a>
-        </div>
-    </header>
 
-    <main class="max-w-6xl mx-auto px-4 py-12 space-y-16">
-
-        <section id="Aspirasi" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10 max-w-3xl mx-auto">
-            <div class="text-center mb-8">
-                <div class="inline-block bg-red-50 text-red-700 p-3 rounded-full mb-3">
-                    <i class="fas fa-bullhorn text-2xl"></i>
+            <form id="formAspirasi" onsubmit="prosesKirim(event)" class="p-6 space-y-6">
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-700" for="nama">
+                        <i class="fas fa-user mr-2 text-red-600"></i>Nama Pengirim (Bisa Anonim/Inisial)
+                    </label>
+                    <input type="text" id="nama" placeholder="Contoh: Siswa Kelas 8 / Hamba Allah" required
+                        class="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50 outline-none focus:border-red-600 focus:bg-white transition">
                 </div>
-                <h2 class="text-2xl font-bold text-gray-900">Formulir E-Aspirasi</h2>
-                <p class="text-gray-500 mt-1">Sampaikan keluhan, saran, atau ide secara langsung dan transparan.</p>
-            </div>
 
-            <form id="formAspirasi" class="space-y-5">
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Kategori Aspirasi</label>
-                    <select id="kategori" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none bg-white" required>
-                        <option value="">-- Pilih Kategori --</option>
-                        <option value="Fasilitas">Fasilitas Sekolah</option>
-                        <option value="KBM">Kegiatan Belajar Mengajar (KBM)</option>
-                        <option value="Ekstrakurikuler">Ekstrakurikuler & OSIS</option>
-                        <option value="Lainnya">Lainnya</option>
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-700" for="kategori">
+                        <i class="fas fa-tags mr-2 text-red-600"></i>Kategori Aspirasi
+                    </label>
+                    <select id="kategori" required
+                        class="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50 outline-none focus:border-red-600 focus:bg-white transition">
+                        <option value="" disabled selected>-- Pilih Kategori --</option>
+                        <option value="Fasilitas Sekolah">Fasilitas Sekolah</option>
+                        <option value="Kegiatan Kesiswaan/Ekskul">Kegiatan Kesiswaan / Ekskul</option>
+                        <option value="Saran Pembelajaran">Saran Pembelajaran</option>
+                        <option value="Kebersihan & Lingkungan">Kebersihan & Lingkungan</option>
+                        <option value="Keluhan Lainnya">Keluhan Lainnya</option>
                     </select>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Identitas Pengirim</label>
-                    <div class="flex gap-4 mt-2">
-                        <label class="flex items-center cursor-pointer">
-                            <input type="radio" name="anonim" value="false" checked class="w-4 h-4 text-red-600 focus:ring-red-500" onclick="toggleNamaInput(false)">
-                            <span class="ml-2 text-sm text-gray-700">Gunakan Nama & Kelas</span>
-                        </label>
-                        <label class="flex items-center cursor-pointer">
-                            <input type="radio" name="anonim" value="true" class="w-4 h-4 text-red-600 focus:ring-red-500" onclick="toggleNamaInput(true)">
-                            <span class="ml-2 text-sm text-gray-700 font-medium text-red-600"><i class="fas fa-user-secret mr-1"></i> Anonim (Rahasia)</span>
-                        </label>
-                    </div>
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-700" for="isi">
+                        <i class="fas fa-comment-alt mr-2 text-red-600"></i>Isi Laporan / Aspirasi Nyata
+                    </label>
+                    <textarea id="isi" rows="5" placeholder="Ketik secara jelas, sopan, dan rinci di sini..." required
+                        class="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50 outline-none focus:border-red-600 focus:bg-white transition resize-none"></textarea>
                 </div>
 
-                <div id="inputIdentitas" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Lengkap</label>
-                        <input type="text" id="nama" placeholder="Contoh: Andi Pratama" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Kelas</label>
-                        <input type="text" id="kelas" placeholder="Contoh: VIII A / IX B" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Isi Aspirasi / Keluhan</label>
-                    <textarea id="pesan" rows="4" placeholder="Tuliskan aspirasi kamu secara jelas di sini..." class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none" required></textarea>
-                </div>
-
-                <button type="submit" class="w-full bg-red-700 hover:bg-red-800 text-white font-bold py-3 rounded-lg shadow transition duration-200 cursor-pointer">
-                    Kirim Aspirasi
+                <button type="submit" id="btnKirim"
+                    class="w-full bg-red-600 hover:bg-red-700 text-white py-3.5 rounded-xl font-bold tracking-wide shadow-md hover:shadow-lg transition flex items-center justify-center space-x-2 cursor-pointer">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Kirim Aspirasi Online</span>
                 </button>
             </form>
-        </section>
+        </div>
+    </main>
 
-        <section id="Tracker" class="space-y-6">
-            <div class="text-center">
-                <h2 class="text-3xl font-bold text-gray-900">Aspirasi Tracker & Tanggapan</h2>
-                <p class="text-gray-500 mt-2">Pantau status penanganan aspirasimu dan baca solusi nyata dari pengurus MPK.</p>
+    <main id="portalAdmin" class="flex-grow max-w-7xl mx-auto w-full px-4 py-10 space-y-8 hidden">
+        <div id="loginAdmin" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center space-y-4">
+            <i class="fas fa-lock text-4xl text-red-600"></i>
+            <h2 class="text-xl font-bold text-gray-900">Otorisasi Diperlukan</h2>
+            <p class="text-xs text-gray-500">Masukkan kata sandi pengurus inti MPK untuk mengakses pangkalan data server.</p>
+            <input type="password" id="passInput" placeholder="Password Server Admin..." class="w-full border border-gray-300 rounded-xl px-4 py-2 text-center outline-none focus:border-red-600">
+            <button onclick="cekPassword()" class="w-full bg-gray-900 hover:bg-gray-800 text-white py-2 rounded-xl font-bold text-sm transition cursor-pointer">Buka Akses Kontrol</button>
+        </div>
+
+        <div id="dashboardAdmin" class="space-y-6 hidden">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-950">Dashboard Pengelolaan Aspirasi</h1>
+                    <p class="text-gray-500 text-sm mt-1">Gunakan tautan Google Sheets cloud Anda untuk mengubah status/tanggapan secara eksternal.</p>
+                </div>
+                <button onclick="muatAspirasiAdmin()" class="bg-red-700 hover:bg-red-800 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow transition cursor-pointer flex items-center">
+                    <i class="fas fa-sync-alt mr-2" id="refreshIcon"></i> Refresh Server Data
+                </button>
             </div>
 
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-gray-100 text-gray-700 font-semibold text-sm border-b border-gray-200">
+                            <tr class="bg-gray-800 text-gray-200 font-semibold text-sm">
                                 <th class="p-4">ID</th>
                                 <th class="p-4">Pengirim</th>
                                 <th class="p-4">Kategori</th>
-                                <th class="p-4 w-1/4">Isi Aspirasi</th>
-                                <th class="p-4">Status</th>
-                                <th class="p-4">Tanggapan / Tindakan MPK</th>
+                                <th class="p-4 w-1/4">Isi Laporan Masuk</th>
+                                <th class="p-4">Status Saat Ini</th>
+                                <th class="p-4 w-1/4">Tanggapan Resmi</th>
                             </tr>
                         </thead>
-                        <tbody id="tabelAspirasi" class="divide-y divide-gray-100 text-sm text-gray-600">
+                        <tbody id="tabelAdmin" class="divide-y divide-gray-200 text-sm text-gray-700">
                             </tbody>
                     </table>
                 </div>
             </div>
-        </section>
-
+        </div>
     </main>
 
-    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm border-t border-gray-800">
-        <p>&copy; 2026 MPK SMPN 4 Paringin. Built with <i class="fas fa-heart text-red-500 mx-1"></i> for Transparency.</p>
+    <footer class="bg-gray-900 text-gray-500 text-center py-4 text-xs border-t border-gray-800 mt-auto">
+        <p>&copy; 2026 MPK SMPN 4 Paringin. Built for Transparency.</p>
     </footer>
 
     <script>
-        function toggleNamaInput(isAnonim) {
-            const container = document.getElementById('inputIdentitas');
-            const namaInput = document.getElementById('nama');
-            const kelasInput = document.getElementById('kelas');
-            if (isAnonim) {
-                container.classList.add('hidden');
-                namaInput.value = '';
-                kelasInput.value = '';
+        // 🔗 Alamat pipa data Google Sheets Apps Script milikmu yang sudah lolos uji keamanan cloud
+        const URL_API = "https://script.google.com/macros/s/AKfycbwy1tDsvWFKeXoPaq_hZa5pZhM1Dq_Vp3cJyhJikHCpjZRIx1ezIPzJYF_T6YGpUoNxQw/exec";
+        
+        // 🔑 Kata sandi masuk untuk Panel Control MPK (Bisa kamu ganti sendiri sesuai keinginan)
+        const KATA_SANDI_ADMIN = "adminmpk4"; 
+
+        // Sistem Tab Navigation
+        function pindahTab(tujuan) {
+            const tabSiswa = document.getElementById('portalSiswa');
+            const tabAdmin = document.getElementById('portalAdmin');
+            const btnSiswa = document.getElementById('btnTabSiswa');
+            const btnAdmin = document.getElementById('btnTabAdmin');
+
+            if(tujuan === 'siswa') {
+                tabSiswa.classList.remove('hidden');
+                tabAdmin.classList.add('hidden');
+                btnSiswa.className = "bg-white text-red-700 px-4 py-2 rounded-lg text-sm font-bold shadow transition cursor-pointer";
+                btnAdmin.className = "bg-red-800 hover:bg-red-900 text-white px-4 py-2 rounded-lg text-sm font-bold transition cursor-pointer";
             } else {
-                container.classList.remove('hidden');
+                tabSiswa.classList.add('hidden');
+                tabAdmin.classList.remove('hidden');
+                btnAdmin.className = "bg-white text-red-700 px-4 py-2 rounded-lg text-sm font-bold shadow transition cursor-pointer";
+                btnSiswa.className = "bg-red-800 hover:bg-red-900 text-white px-4 py-2 rounded-lg text-sm font-bold transition cursor-pointer";
             }
         }
 
-        function muatAspirasiSiswa() {
-            const tabel = document.getElementById('tabelAspirasi');
-            tabel.innerHTML = '';
-            let daftarAspirasi = JSON.parse(localStorage.getItem('aspirasiMPK'));
-            if (!daftarAspirasi) {
-                daftarAspirasi = [
-                    { id: '#MPK01', pengirim: 'Rian (IX A)', kategori: 'Fasilitas', isi: 'Kipas angin di ruang kelas VIII B goyang dan bunyinya bising.', status: 'Selesai', tanggapan: 'Sudah ditindaklanjuti ke pihak Sarpras sekolah.' },
-                    { id: '#MPK02', pengirim: '<i class="fas fa-user-secret mr-1"></i> Anonim', kategori: 'Ekstrakurikuler', isi: 'Usul diadakan classmeeting lomba futsal antarkelas setelah PAS.', status: 'Diproses OSIS', tanggapan: 'Aspirasi sedang dirapatkan oleh OSIS.' }
-                ];
-                localStorage.setItem('aspirasiMPK', JSON.stringify(daftarAspirasi));
+        // Verifikasi Akses Masuk Panel Admin
+        function cekPassword() {
+            const input = document.getElementById('passInput').value;
+            if(input === KATA_SANDI_ADMIN) {
+                document.getElementById('loginAdmin').classList.add('hidden');
+                document.getElementById('dashboardAdmin').classList.remove('hidden');
+                muatAspirasiAdmin();
+            } else {
+                alert("❌ Kata sandi server salah! Akses ditolak.");
             }
-            daftarAspirasi.forEach(item => {
-                let statusClass = item.status === 'Selesai' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
-                const baris = document.createElement('tr');
-                baris.innerHTML = `
-                    <td class="p-4 font-mono font-bold text-red-600">${item.id}</td>
-                    <td class="p-4">${item.pengirim}</td>
-                    <td class="p-4"><span class="bg-red-50 text-red-700 px-2.5 py-1 rounded-full text-xs">${item.kategori}</span></td>
-                    <td class="p-4 text-gray-600 break-words">${item.isi}</td>
-                    <td class="p-4"><span class="${statusClass} px-2.5 py-1 rounded-full text-xs">${item.status}</span></td>
-                    <td class="p-4">${item.tanggapan || 'Menunggu verifikasi.'}</td>
-                `;
-                tabel.appendChild(baris);
+        }
+
+        // PORTAL SISWA: Mengirim Data ke Google Sheets
+        function prosesKirim(event) {
+            event.preventDefault();
+
+            const btnKirim = document.getElementById('btnKirim');
+            const nama = document.getElementById('nama').value;
+            const kategori = document.getElementById('kategori').value;
+            const isi = document.getElementById('isi').value;
+            const idAspirasi = "MPK-" + Math.floor(1000 + Math.random() * 9000);
+
+            btnKirim.disabled = true;
+            btnKirim.className = "w-full bg-gray-400 text-white py-3.5 rounded-xl font-bold tracking-wide cursor-not-allowed flex items-center justify-center space-x-2";
+            btnKirim.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i><span>Mengirim ke Server Cloud...</span>`;
+
+            let paketData = {
+                action: "kirim",
+                id: idAspirasi,
+                pengirim: nama,
+                kategori: kategori,
+                isi: isi
+            };
+
+            fetch(URL_API, {
+                method: "POST",
+                body: JSON.stringify(paketData)
+            })
+            .then(res => res.json())
+            .then(hasil => {
+                if(hasil.status === "sukses") {
+                    alert(`✅ Sukses! Aspirasimu berhasil terkirim ke Server Cloud MPK.\n\nSimpan ID Laporanmu: ${idAspirasi}`);
+                    document.getElementById('formAspirasi').reset();
+                } else {
+                    alert("⚠️ Server cloud menolak data. Periksa pengaturan Web App Anda.");
+                }
+            })
+            .catch(err => {
+                alert("❌ Gagal terhubung ke cloud server. Pastikan internet aktif.");
+            })
+            .finally(() => {
+                btnKirim.disabled = false;
+                btnKirim.className = "w-full bg-red-600 hover:bg-red-700 text-white py-3.5 rounded-xl font-bold tracking-wide shadow-md hover:shadow-lg transition flex items-center justify-center space-x-2 cursor-pointer";
+                btnKirim.innerHTML = `<i class="fas fa-paper-plane"></i><span>Kirim Aspirasi Online</span>`;
             });
         }
 
-        document.getElementById('formAspirasi').addEventListener('submit', function(e) {
-            e.preventDefault();
-            let daftarAspirasi = JSON.parse(localStorage.getItem('aspirasiMPK')) || [];
-            const kategori = document.getElementById('kategori').value;
-            const isAnonim = document.querySelector('input[name="anonim"]:checked').value === "true";
-            const nama = document.getElementById('nama').value || "Siswa";
-            const kelas = document.getElementById('kelas').value || "";
-            const pesan = document.getElementById('pesan').value;
+        // SERVER ADMIN: Mengambil Data Real-Time Dari Google Sheets
+        async function muatAspirasiAdmin() {
+            const tabel = document.getElementById('tabelAdmin');
+            const icon = document.getElementById('refreshIcon');
+            
+            icon.classList.add('fa-spin');
+            tabel.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-500"><i class="fas fa-sync-alt fa-spin mr-2"></i>Menghubungkan ke pangkalan data cloud...</td></tr>`;
 
-            let pengirimText = isAnonim ? `<i class="fas fa-user-secret mr-1"></i> Anonim` : `${nama} (${kelas})`;
-            daftarAspirasi.unshift({ id: `#MPK0${daftarAspirasi.length + 1}`, pengirim: pengirimText, kategori: kategori, isi: pesan, status: 'Menunggu', tanggapan: '' });
-            localStorage.setItem('aspirasiMPK', JSON.stringify(daftarAspirasi));
-            alert('Aspirasi terkirim!');
-            document.getElementById('formAspirasi').reset();
-            muatAspirasiSiswa();
-        });
-        window.onload = muatAspirasiSiswa;
+            try {
+                let respon = await fetch(URL_API);
+                let dataAspirasi = await respon.json();
+
+                tabel.innerHTML = '';
+
+                if(dataAspirasi.length === 0) {
+                    tabel.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-400 italic">Pangkalan data kosong. Belum ada aspirasi masuk.</td></tr>`;
+                    return;
+                }
+
+                dataAspirasi.forEach((item) => {
+                    let statusClass = 'bg-gray-100 text-gray-600';
+                    if (item.status === 'Selesai') statusClass = 'bg-green-100 text-green-800 font-bold';
+                    if (item.status === 'Diproses OSIS') statusClass = 'bg-yellow-100 text-yellow-800 font-bold';
+
+                    const baris = document.createElement('tr');
+                    baris.className = "hover:bg-gray-50 transition border-b border-gray-100";
+                    baris.innerHTML = `
+                        <td class="p-4 font-mono font-bold text-red-600">${item.id}</td>
+                        <td class="p-4 font-medium">${item.pengirim}</td>
+                        <td class="p-4"><span class="bg-red-50 text-red-700 px-2.5 py-1 rounded-full text-xs font-medium">${item.kategori}</span></td>
+                        <td class="p-4 text-gray-600 break-words">${item.isi}</td>
+                        <td class="p-4"><span class="${statusClass} px-2.5 py-1 rounded-full text-xs">${item.status || 'Menunggu Antrean'}</span></td>
+                        <td class="p-4 text-gray-500 italic">${item.tanggapan || '<span class="text-gray-400 text-xs">Belum ditanggapi</span>'}</td>
+                    `;
+                    tabel.appendChild(baris);
+                });
+            } catch (error) {
+                tabel.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-red-600 font-bold">⚠️ Sinkronisasi Cloud Gagal. Periksa koneksi atau deployment Apps Script Anda.</td></tr>`;
+            } finally {
+                icon.classList.remove('fa-spin');
+            }
+        }
     </script>
 </body>
 </html>
