@@ -11,6 +11,7 @@
 </head>
 <body class="bg-gray-50 font-sans text-gray-800 flex flex-col min-h-screen">
 
+    <!-- NAVIGATION BAR -->
     <nav class="bg-gradient-to-r from-red-700 to-red-900 text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4">
@@ -22,7 +23,7 @@
             </div>
             <div class="flex space-x-2">
                 <button onclick="pindahTab('siswa')" id="btnTabSiswa" class="bg-white text-red-700 px-4 py-2 rounded-lg text-sm font-bold shadow transition cursor-pointer">
-                    <i class="fas fa-user mr-1"></i> Portal Siswa
+                    <i class="fas fa-user mr-1"></i> Student Portal
                 </button>
                 <button onclick="pindahTab('admin')" id="btnTabAdmin" class="bg-red-800 hover:bg-red-900 text-white px-4 py-2 rounded-lg text-sm font-bold transition cursor-pointer">
                     <i class="fas fa-user-shield mr-1"></i> Server Admin
@@ -31,6 +32,7 @@
         </div>
     </nav>
 
+    <!-- ================= PORTAL SISWA ================= -->
     <main id="portalSiswa" class="flex-grow max-w-2xl mx-auto w-full px-4 py-10">
         <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
             <div class="bg-gray-900 px-6 py-8 text-white text-center space-y-2">
@@ -79,7 +81,9 @@
         </div>
     </main>
 
+    <!-- ================= SERVER PANEL ADMIN ================= -->
     <main id="portalAdmin" class="flex-grow max-w-7xl mx-auto w-full px-4 py-10 space-y-8 hidden">
+        <!-- Pintu Login Sederhana -->
         <div id="loginAdmin" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center space-y-4">
             <i class="fas fa-lock text-4xl text-red-600"></i>
             <h2 class="text-xl font-bold text-gray-900">Otorisasi Diperlukan</h2>
@@ -88,6 +92,7 @@
             <button onclick="cekPassword()" class="w-full bg-gray-900 hover:bg-gray-800 text-white py-2 rounded-xl font-bold text-sm transition cursor-pointer">Buka Akses Kontrol</button>
         </div>
 
+        <!-- Dashboard Kontrol -->
         <div id="dashboardAdmin" class="space-y-6 hidden">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
@@ -113,17 +118,20 @@
                             </tr>
                         </thead>
                         <tbody id="tabelAdmin" class="divide-y divide-gray-200 text-sm text-gray-700">
-                            </tbody>
+                            <!-- Data Cloud Mengalir di Sini -->
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- FOOTER -->
     <footer class="bg-gray-900 text-gray-500 text-center py-4 text-xs border-t border-gray-800 mt-auto">
         <p>&copy; 2026 MPK SMPN 4 Paringin. Built for Transparency.</p>
     </footer>
 
+    <!-- LOGIKA JAVASCRIPT & KONEKSI CLOUD VIA HTTPS -->
     <script>
         const URL_API = "https://script.google.com/macros/s/AKfycbwy1tDsvWFKeXoPaq_hZa5pZhM1Dq_Vp3cJyhJikHCpjZRIx1ezIPzJYF_T6YGpUoNxQw/exec";
         const KATA_SANDI_ADMIN = "adminmpk4"; 
@@ -251,7 +259,7 @@
                 });
             } catch (error) {
                 tabel.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-red-600 font-bold">⚠️ Sinkronisasi Cloud Gagal.</td></tr>`;
-            } columns finally {
+            } finally {
                 icon.classList.remove('fa-spin');
             }
         }
@@ -276,9 +284,9 @@
             .then(hasil => {
                 if(hasil.status === "sukses") {
                     alert(`✅ Status ID ${idLaporan} berhasil diperbarui di server cloud!`);
-                    muatAspirasiAdmin(); // Menyegarkan ulang tabel agar tampilan berubah
+                    muatAspirasiAdmin();
                 } else {
-                    alert("⚠️ Gagal memperbarui status. Pastikan Apps Script Anda mendukung aksi updateStatus.");
+                    alert("⚠️ Gagal memperbarui status. Periksa skrip database cloud Anda.");
                 }
             })
             .catch(err => {
