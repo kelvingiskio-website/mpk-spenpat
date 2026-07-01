@@ -11,7 +11,6 @@
 </head>
 <body class="bg-gray-50 font-sans text-gray-800 flex flex-col min-h-screen">
 
-    <!-- NAVIGATION BAR -->
     <nav class="bg-gradient-to-r from-red-700 to-red-900 text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4">
@@ -32,7 +31,6 @@
         </div>
     </nav>
 
-    <!-- ================= PORTAL SISWA ================= -->
     <main id="portalSiswa" class="flex-grow max-w-2xl mx-auto w-full px-4 py-10">
         <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
             <div class="bg-gray-900 px-6 py-8 text-white text-center space-y-2">
@@ -81,9 +79,7 @@
         </div>
     </main>
 
-    <!-- ================= SERVER PANEL ADMIN ================= -->
     <main id="portalAdmin" class="flex-grow max-w-7xl mx-auto w-full px-4 py-10 space-y-8 hidden">
-        <!-- Pintu Login Sederhana -->
         <div id="loginAdmin" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center space-y-4">
             <i class="fas fa-lock text-4xl text-red-600"></i>
             <h2 class="text-xl font-bold text-gray-900">Otorisasi Diperlukan</h2>
@@ -92,12 +88,11 @@
             <button onclick="cekPassword()" class="w-full bg-gray-900 hover:bg-gray-800 text-white py-2 rounded-xl font-bold text-sm transition cursor-pointer">Buka Akses Kontrol</button>
         </div>
 
-        <!-- Dashboard Kontrol -->
         <div id="dashboardAdmin" class="space-y-6 hidden">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
                     <h1 class="text-3xl font-bold text-gray-950">Dashboard Pengelolaan Aspirasi</h1>
-                    <p class="text-gray-500 text-sm mt-1">Konfirmasi laporan masuk, ubah status, atau berikan tanggapan langsung dari panel ini.</p>
+                    <p class="text-gray-500 text-sm mt-1">Konfirmasi laporan masuk, ubah status, atau hapus data secara permanen.</p>
                 </div>
                 <button onclick="muatAspirasiAdmin()" class="bg-red-700 hover:bg-red-800 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow transition cursor-pointer flex items-center">
                     <i class="fas fa-sync-alt mr-2" id="refreshIcon"></i> Refresh Server Data
@@ -114,24 +109,21 @@
                                 <th class="p-4">Kategori</th>
                                 <th class="p-4 w-1/4">Isi Laporan Masuk</th>
                                 <th class="p-4">Status Saat Ini</th>
-                                <th class="p-4">Aksi Konfirmasi Admin</th>
+                                <th class="p-4">Aksi Kontrol Admin</th>
                             </tr>
                         </thead>
                         <tbody id="tabelAdmin" class="divide-y divide-gray-200 text-sm text-gray-700">
-                            <!-- Data Cloud Mengalir di Sini -->
-                        </tbody>
+                            </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-gray-900 text-gray-500 text-center py-4 text-xs border-t border-gray-800 mt-auto">
         <p>&copy; 2026 MPK SMPN 4 Paringin. Built for Transparency.</p>
     </footer>
 
-    <!-- LOGIKA JAVASCRIPT & KONEKSI CLOUD VIA HTTPS -->
     <script>
         const URL_API = "https://script.google.com/macros/s/AKfycbwy1tDsvWFKeXoPaq_hZa5pZhM1Dq_Vp3cJyhJikHCpjZRIx1ezIPzJYF_T6YGpUoNxQw/exec";
         const KATA_SANDI_ADMIN = "adminmpk4"; 
@@ -166,10 +158,9 @@
             }
         }
 
-        // PORTAL SISWA: Kirim Aspirasi
+        // KIRIM DATA
         function prosesKirim(event) {
             event.preventDefault();
-
             const btnKirim = document.getElementById('btnKirim');
             const nama = document.getElementById('nama').value;
             const kategori = document.getElementById('kategori').value;
@@ -180,30 +171,17 @@
             btnKirim.className = "w-full bg-gray-400 text-white py-3.5 rounded-xl font-bold tracking-wide cursor-not-allowed flex items-center justify-center space-x-2";
             btnKirim.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i><span>Mengirim ke Server Cloud...</span>`;
 
-            let paketData = {
-                action: "kirim",
-                id: idAspirasi,
-                pengirim: nama,
-                kategori: kategori,
-                isi: isi
-            };
+            let paketData = { action: "kirim", id: idAspirasi, pengirim: nama, kategori: kategori, isi: isi };
 
-            fetch(URL_API, {
-                method: "POST",
-                body: JSON.stringify(paketData)
-            })
+            fetch(URL_API, { method: "POST", body: JSON.stringify(paketData) })
             .then(res => res.json())
             .then(hasil => {
                 if(hasil.status === "sukses") {
                     alert(`✅ Sukses! Aspirasimu berhasil terkirim.\n\nSimpan ID Laporanmu: ${idAspirasi}`);
                     document.getElementById('formAspirasi').reset();
-                } else {
-                    alert("⚠️ Server cloud menolak data.");
-                }
+                } else { alert("⚠️ Server cloud menolak data."); }
             })
-            .catch(err => {
-                alert("❌ Gagal terhubung ke cloud server.");
-            })
+            .catch(err => { alert("❌ Gagal terhubung ke cloud server."); })
             .finally(() => {
                 btnKirim.disabled = false;
                 btnKirim.className = "w-full bg-red-600 hover:bg-red-700 text-white py-3.5 rounded-xl font-bold tracking-wide shadow-md hover:shadow-lg transition flex items-center justify-center space-x-2 cursor-pointer";
@@ -211,18 +189,16 @@
             });
         }
 
-        // SERVER ADMIN: Ambil Data Real-Time
+        // MUAT DATA ADMIN
         async function muatAspirasiAdmin() {
             const tabel = document.getElementById('tabelAdmin');
             const icon = document.getElementById('refreshIcon');
-            
             icon.classList.add('fa-spin');
             tabel.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-500"><i class="fas fa-sync-alt fa-spin mr-2"></i>Menghubungkan ke pangkalan data cloud...</td></tr>`;
 
             try {
                 let respon = await fetch(URL_API);
                 let dataAspirasi = await respon.json();
-
                 tabel.innerHTML = '';
 
                 if(dataAspirasi.length === 0) {
@@ -246,11 +222,14 @@
                         <td class="p-4"><span class="${statusClass} px-2.5 py-1 rounded-full text-xs">${textStatus}</span></td>
                         <td class="p-4">
                             <div class="flex flex-col gap-1.5 sm:flex-row">
-                                <button onclick="ubahStatusLaporan('${item.id}', 'Diproses OSIS')" class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-2.5 py-1.5 rounded font-semibold transition cursor-pointer">
-                                    <i class="fas fa-spinner mr-1"></i> Proses OSIS
+                                <button onclick="ubahStatusLaporan('${item.id}', 'Diproses OSIS')" class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-2 py-1.5 rounded font-semibold transition cursor-pointer">
+                                    <i class="fas fa-spinner mr-1"></i> Proses
                                 </button>
-                                <button onclick="ubahStatusLaporan('${item.id}', 'Selesai')" class="bg-green-600 hover:bg-green-700 text-white text-xs px-2.5 py-1.5 rounded font-semibold transition cursor-pointer">
+                                <button onclick="ubahStatusLaporan('${item.id}', 'Selesai')" class="bg-green-600 hover:bg-green-700 text-white text-xs px-2 py-1.5 rounded font-semibold transition cursor-pointer">
                                     <i class="fas fa-check mr-1"></i> Selesai
+                                </button>
+                                <button onclick="hapusLaporanKeluarga('${item.id}')" class="bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1.5 rounded font-semibold transition cursor-pointer">
+                                    <i class="fas fa-trash-alt mr-1"></i> Hapus
                                 </button>
                             </div>
                         </td>
@@ -259,39 +238,37 @@
                 });
             } catch (error) {
                 tabel.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-red-600 font-bold">⚠️ Sinkronisasi Cloud Gagal.</td></tr>`;
-            } finally {
-                icon.classList.remove('fa-spin');
-            }
+            } finally { icon.classList.remove('fa-spin'); }
         }
 
-        // SERVER ADMIN: Mengubah Status secara Online langsung ke Google Sheets
+        // EDIT STATUS
         function ubahStatusLaporan(idLaporan, statusBaru) {
             if(!confirm(`Ubah status laporan ${idLaporan} menjadi "${statusBaru}"?`)) return;
+            let dataUpdate = { action: "updateStatus", id: idLaporan, status: statusBaru };
 
-            let dataUpdate = {
-                action: "updateStatus",
-                id: idLaporan,
-                status: statusBaru
-            };
+            fetch(URL_API, { method: "POST", body: JSON.stringify(dataUpdate) })
+            .then(res => res.json())
+            .then(hasil => {
+                if(hasil.status === "sukses") { muatAspirasiAdmin(); }
+                else { alert("⚠️ Gagal memperbarui status."); }
+            }).catch(err => { alert("❌ Gagal terhubung ke server."); });
+        }
 
-            alert("Sedang mengirim instruksi perubahan status ke cloud database...");
+        // HAPUS DATA PERMANEN
+        function hapusLaporanKeluarga(idLaporan) {
+            if(!confirm(`⚠️ PERINGATAN DATA PERMANEN!\n\nApakah kamu yakin ingin menghapus laporan dengan ID ${idLaporan} secara total dari database cloud?`)) return;
 
-            fetch(URL_API, {
-                method: "POST",
-                body: JSON.stringify(dataUpdate)
-            })
+            let dataHapus = { action: "hapusAspirasi", id: idLaporan };
+            alert("Sedang menghapus data dari server cloud...");
+
+            fetch(URL_API, { method: "POST", body: JSON.stringify(dataHapus) })
             .then(res => res.json())
             .then(hasil => {
                 if(hasil.status === "sukses") {
-                    alert(`✅ Status ID ${idLaporan} berhasil diperbarui di server cloud!`);
+                    alert(`🗑️ Sukses! Data laporan ${idLaporan} telah dihapus selamanya.`);
                     muatAspirasiAdmin();
-                } else {
-                    alert("⚠️ Gagal memperbarui status. Periksa skrip database cloud Anda.");
-                }
-            })
-            .catch(err => {
-                alert("❌ Terjadi kesalahan jaringan saat memperbarui status.");
-            });
+                } else { alert("⚠️ Server menolak permintaan hapus data."); }
+            }).catch(err => { alert("❌ Terjadi kesalahan jaringan saat menghapus."); });
         }
     </script>
 </body>
