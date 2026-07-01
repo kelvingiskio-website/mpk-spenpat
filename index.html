@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPK SMPN 4 Paringin - Wadah Aspirasi Siswa</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Trik CSS untuk menghilangkan background hitam secara instan pada latar merah/gelap */
+        .remove-black-bg {
+            mix-blend-mode: screen;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+    <nav class="bg-red-700 text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="h-10 w-10 overflow-hidden flex items-center justify-center">
+                    <img src="logo mpk.jpeg" alt="Logo MPK" class="h-12 w-12 object-cover remove-black-bg max-w-none">
+                </div>
+                <span class="font-bold text-xl tracking-wide">MPK SMPN 4 Paringin</span>
+            </div>
+            <div class="hidden md:flex space-x-6 font-medium">
+                <a href="#Beranda" class="hover:text-red-200 transition">Beranda</a>
+                <a href="#Aspirasi" class="hover:text-red-200 transition">E-Aspirasi</a>
+                <a href="#Tracker" class="hover:text-red-200 transition">Status & Tanggapan</a>
+                <a href="#Struktur" class="hover:text-red-200 transition">Komisi</a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="Beranda" class="bg-gradient-to-r from-red-700 to-red-600 text-white py-16 px-4 text-center">
+        <div class="max-w-3xl mx-auto flex flex-col items-center">
+            <div class="h-32 w-32 mb-6 flex items-center justify-center overflow-hidden">
+                <img src="logo mpk.jpeg" alt="Logo MPK" class="h-36 w-36 object-cover remove-black-bg max-w-none">
+            </div>
+            
+            <span class="bg-white text-red-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Suaramu, Hakmu!</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold mt-4 mb-6 leading-tight">MPK SMPN 4 Paringin Digital Hub</h1>
+            <p class="text-red-100 text-lg mb-8">Selamat datang di platform resmi Majelis Perwakilan Kelas SMPN 4 Paringin. Sampaikan aspirasi, kritik, dan saranmu demi kemajuan sekolah kita bersama.</p>
+            <a href="#Aspirasi" class="bg-white hover:bg-gray-100 text-red-700 font-bold px-8 py-3 rounded-lg shadow-lg transition transform hover:-translate-y-0.5">
+                Kirim Aspirasi Sekarang <i class="fas fa-paper-plane ml-2"></i>
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-12 space-y-16">
+
+        <section id="Aspirasi" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10 max-w-3xl mx-auto">
+            <div class="text-center mb-8">
+                <div class="inline-block bg-red-50 text-red-700 p-3 rounded-full mb-3">
+                    <i class="fas fa-bullhorn text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900">Formulir E-Aspirasi</h2>
+                <p class="text-gray-500 mt-1">Sampaikan keluhan, saran, atau ide secara langsung dan transparan.</p>
+            </div>
+
+            <form id="formAspirasi" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Kategori Aspirasi</label>
+                    <select id="kategori" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none bg-white" required>
+                        <option value="">-- Pilih Kategori --</option>
+                        <option value="Fasilitas">Fasilitas Sekolah</option>
+                        <option value="KBM">Kegiatan Belajar Mengajar (KBM)</option>
+                        <option value="Ekstrakurikuler">Ekstrakurikuler & OSIS</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Identitas Pengirim</label>
+                    <div class="flex gap-4 mt-2">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="anonim" value="false" checked class="w-4 h-4 text-red-600 focus:ring-red-500" onclick="toggleNamaInput(false)">
+                            <span class="ml-2 text-sm text-gray-700">Gunakan Nama & Kelas</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="anonim" value="true" class="w-4 h-4 text-red-600 focus:ring-red-500" onclick="toggleNamaInput(true)">
+                            <span class="ml-2 text-sm text-gray-700 font-medium text-red-600"><i class="fas fa-user-secret mr-1"></i> Anonim (Rahasia)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="inputIdentitas" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Lengkap</label>
+                        <input type="text" id="nama" placeholder="Contoh: Andi Pratama" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Kelas</label>
+                        <input type="text" id="kelas" placeholder="Contoh: VIII A / IX B" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Isi Aspirasi / Keluhan</label>
+                    <textarea id="pesan" rows="4" placeholder="Tuliskan aspirasi kamu secara jelas di sini..." class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none" required></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-red-700 hover:bg-red-800 text-white font-bold py-3 rounded-lg shadow transition duration-200 cursor-pointer">
+                    Kirim Aspirasi
+                </button>
+            </form>
+        </section>
+
+        <section id="Tracker" class="space-y-6">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-gray-900">Aspirasi Tracker & Tanggapan</h2>
+                <p class="text-gray-500 mt-2">Pantau status penanganan aspirasimu dan baca solusi nyata dari pengurus MPK.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700 font-semibold text-sm border-b border-gray-200">
+                                <th class="p-4">ID</th>
+                                <th class="p-4">Pengirim</th>
+                                <th class="p-4">Kategori</th>
+                                <th class="p-4 w-1/4">Isi Aspirasi</th>
+                                <th class="p-4">Status</th>
+                                <th class="p-4">Tanggapan / Tindakan MPK</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelAspirasi" class="divide-y divide-gray-100 text-sm text-gray-600">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm border-t border-gray-800">
+        <p>&copy; 2026 MPK SMPN 4 Paringin. Built with <i class="fas fa-heart text-red-500 mx-1"></i> for Transparency.</p>
+    </footer>
+
+    <script>
+        function toggleNamaInput(isAnonim) {
+            const container = document.getElementById('inputIdentitas');
+            const namaInput = document.getElementById('nama');
+            const kelasInput = document.getElementById('kelas');
+            if (isAnonim) {
+                container.classList.add('hidden');
+                namaInput.value = '';
+                kelasInput.value = '';
+            } else {
+                container.classList.remove('hidden');
+            }
+        }
+
+        function muatAspirasiSiswa() {
+            const tabel = document.getElementById('tabelAspirasi');
+            tabel.innerHTML = '';
+            let daftarAspirasi = JSON.parse(localStorage.getItem('aspirasiMPK'));
+            if (!daftarAspirasi) {
+                daftarAspirasi = [
+                    { id: '#MPK01', pengirim: 'Rian (IX A)', kategori: 'Fasilitas', isi: 'Kipas angin di ruang kelas VIII B goyang dan bunyinya bising.', status: 'Selesai', tanggapan: 'Sudah ditindaklanjuti ke pihak Sarpras sekolah.' },
+                    { id: '#MPK02', pengirim: '<i class="fas fa-user-secret mr-1"></i> Anonim', kategori: 'Ekstrakurikuler', isi: 'Usul diadakan classmeeting lomba futsal antarkelas setelah PAS.', status: 'Diproses OSIS', tanggapan: 'Aspirasi sedang dirapatkan oleh OSIS.' }
+                ];
+                localStorage.setItem('aspirasiMPK', JSON.stringify(daftarAspirasi));
+            }
+            daftarAspirasi.forEach(item => {
+                let statusClass = item.status === 'Selesai' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
+                const baris = document.createElement('tr');
+                baris.innerHTML = `
+                    <td class="p-4 font-mono font-bold text-red-600">${item.id}</td>
+                    <td class="p-4">${item.pengirim}</td>
+                    <td class="p-4"><span class="bg-red-50 text-red-700 px-2.5 py-1 rounded-full text-xs">${item.kategori}</span></td>
+                    <td class="p-4 text-gray-600 break-words">${item.isi}</td>
+                    <td class="p-4"><span class="${statusClass} px-2.5 py-1 rounded-full text-xs">${item.status}</span></td>
+                    <td class="p-4">${item.tanggapan || 'Menunggu verifikasi.'}</td>
+                `;
+                tabel.appendChild(baris);
+            });
+        }
+
+        document.getElementById('formAspirasi').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let daftarAspirasi = JSON.parse(localStorage.getItem('aspirasiMPK')) || [];
+            const kategori = document.getElementById('kategori').value;
+            const isAnonim = document.querySelector('input[name="anonim"]:checked').value === "true";
+            const nama = document.getElementById('nama').value || "Siswa";
+            const kelas = document.getElementById('kelas').value || "";
+            const pesan = document.getElementById('pesan').value;
+
+            let pengirimText = isAnonim ? `<i class="fas fa-user-secret mr-1"></i> Anonim` : `${nama} (${kelas})`;
+            daftarAspirasi.unshift({ id: `#MPK0${daftarAspirasi.length + 1}`, pengirim: pengirimText, kategori: kategori, isi: pesan, status: 'Menunggu', tanggapan: '' });
+            localStorage.setItem('aspirasiMPK', JSON.stringify(daftarAspirasi));
+            alert('Aspirasi terkirim!');
+            document.getElementById('formAspirasi').reset();
+            muatAspirasiSiswa();
+        });
+        window.onload = muatAspirasiSiswa;
+    </script>
+</body>
+</html>
