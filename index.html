@@ -3,9 +3,19 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="google-site-verification" content="_7vBoeJ7Kqv-SsHGo9iVnmiczgGg01ipTOD5ZlikAFM" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Aspirasi MPK SMPN 4 Paringin</title>
+    
+    <title>MPK SMPN 4 Paringin | E-Aspirasi Online</title>
+    <meta name="description" content="Layanan aspirasi online resmi MPK SMPN 4 Paringin. Sampaikan ide, keluhan, dan saranmu langsung kepada pengurus sekolah.">
+    
+    <link rel="icon" type="image/x-icon" href="logo mpk.jpeg">
+    
+    <meta property="og:title" content="MPK SMPN 4 Paringin | E-Aspirasi Online">
+    <meta property="og:description" content="Layanan aspirasi online resmi MPK SMPN 4 Paringin.">
+    <meta property="og:image" content="logo mpk.jpeg">
+    
+    <meta name="google-site-verification" content="_7vBoeJ7Kqv-SsHGo9iVnmiczgGg01ipTOD5ZlikAFM" />
+    
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -222,13 +232,13 @@
                         <td class="p-4"><span class="${statusClass} px-2.5 py-1 rounded-full text-xs">${textStatus}</span></td>
                         <td class="p-4">
                             <div class="flex flex-col gap-1.5 sm:flex-row">
-                                <button onclick="ubahStatusLaporan('${item.id}', 'Diproses OSIS')" class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-2 py-1.5 rounded font-semibold transition cursor-pointer">
+                                <button onclick="ubahStatusLaporan('${item.id}', 'Diproses OSIS')" class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-2.5 py-1.5 rounded font-semibold transition cursor-pointer">
                                     <i class="fas fa-spinner mr-1"></i> Proses
                                 </button>
-                                <button onclick="ubahStatusLaporan('${item.id}', 'Selesai')" class="bg-green-600 hover:bg-green-700 text-white text-xs px-2 py-1.5 rounded font-semibold transition cursor-pointer">
+                                <button onclick="ubahStatusLaporan('${item.id}', 'Selesai')" class="bg-green-600 hover:bg-green-700 text-white text-xs px-2.5 py-1.5 rounded font-semibold transition cursor-pointer">
                                     <i class="fas fa-check mr-1"></i> Selesai
                                 </button>
-                                <button onclick="hapusLaporanKeluarga('${item.id}')" class="bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1.5 rounded font-semibold transition cursor-pointer">
+                                <button onclick="hapusLaporanKeluarga('${item.id}')" class="bg-red-600 hover:bg-red-700 text-white text-xs px-2.5 py-1.5 rounded font-semibold transition cursor-pointer">
                                     <i class="fas fa-trash-alt mr-1"></i> Hapus
                                 </button>
                             </div>
